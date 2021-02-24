@@ -15,7 +15,7 @@
 #### 빅데이터 처리 교육과정 (R/Python)
 
 1. **데이터 수집과 저장:** AWS는 나중에 상황이 될때 진행(비정형/정형에 따라 MongoDB, MariaDB 사용)하며, 우선은 파일로 저장
-2. **EDA를 통한 시각화와 전처리:** EDA(Exploratory Data Analysis, 탐색적 데이터 분석) 연습과 시곽화 전처리 연습
+2. **EDA를 통한 시각화와 전처리:** EDA(Exploratory Data Analysis, 탐색적 데이터 분석) 연습과 시각화 전처리 연습
 3. 데이터 분석
 4. 분석 결과/시각화 표현
 
@@ -235,11 +235,135 @@
 
 # 2020-02-23 수업기록(R)
 
-|           오전            | 오후  |
-| :-----------------------: | :---: |
-| 행렬(matrix), lab2, 배열, | 펙터, |
+|           오전            |        오후        |
+| :-----------------------: | :----------------: |
+| 행렬(matrix), lab2, 배열, | 펙터, 데이터프레임 |
 
 #### What to do
 
 - [ ] R언어 복습
 
+
+
+#### 행렬 (matrix)
+
+1. 행렬생성하는 법
+
+   - matrix()
+
+     ```R
+     x1 = matrix(1:8, nrow = 2) #ncol 매개변수의 값 생략 가능
+     > x1
+          [,1] [,2] [,3] [,4]
+     [1,]    1    3    5    7
+     [2,]    2    4    6    8
+     
+     x2 = matrix(1:9, nrow=3, ncol=3, byrow=T) #'byrow=T'는 데이터를 행 부터 정렬
+     > x2
+          [,1] [,2] [,3]
+     [1,]    1    2    3
+     [2,]    4    5    6
+     [3,]    7    8    9
+     ```
+
+   - rbind(벡터, 벡터, 벡터), rbind(행렬, 벡터), cbind()도 rbind와 동일
+
+     ```R
+     n1 = c(1:3)
+     n2 = c(4:6)
+     n3 = c(7:9)
+     m1 = cbind(n1, n2, n3)
+     colnames(m2) <- NULL # cbind에서 생성된 col의 이름을 제거
+     > m1
+          [,1] [,2] [,3]
+     [1,]    1    4    7
+     [2,]    2    5    8
+     [3,]    3    6    9
+     
+     alpha = matrix(letters[1:6], nrow=2, ncol=3)
+     alpha3 = cbind(alpha,c("s","p")) # 아규먼트로 메트릭스, 벡터로 구성
+     > alpha3
+          [,1] [,2] [,3] [,4]
+     [1,] "a"  "c"  "e"  "s" 
+     [2,] "b"  "d"  "f"  "p" 
+     ```
+
+
+
+#### 배열 함수 (array)
+
+1. 배열생성하는 법
+
+   - array(벡터, dim=c(row,col,array))
+
+     ```R
+     a = array(1:24, dim=c(1,2,3))
+     > a
+     , , 1
+     
+          [,1] [,2]
+     [1,]    1    2
+     
+     , , 2
+     
+          [,1] [,2]
+     [1,]    3    4
+     
+     , , 3
+     
+          [,1] [,2]
+     [1,]    5    6
+     ```
+
+     
+
+#### 펙터 (factor)
+
+1. factor생성하는 법
+
+   - factor()
+
+     ```R
+     score <- c(1,3,2,4,2,1,3,5,1,3,3,3)
+     f_score <- factor(score) 
+     > f_score
+      [1] 1 3 2 4 2 1 3 5 1 3 3 3
+     Levels: 1 2 3 4 5
+     ```
+
+   - as.factor()
+
+     ```R
+     score <- c(1,3,2,4,2,1,3,5,1,3,3,3)
+     f_score1 <- as.factor(score)
+     > f_score1
+      [1] 1 3 2 4 2 1 3 5 1 3 3 3
+     Levels: 1 2 3 4 5
+     ```
+
+     
+
+#### 데이터프레임 함수 (data frame)
+
+1. datafram 생성하는 법: data.frame(), 
+
+   ```R
+   x = matrix(1:8, nrow = 2) #ncol 매개변수의 값 생략 가능
+   
+   ```
+
+2. str(), summary()
+3. read.csv(file.choose())
+4. df[], df$col, subset(), order(), as.factor, 
+
+
+
+# 2020-02-24 수업기록(R)
+
+|    오전    |     오후     |
+| :--------: | :----------: |
+| lab3 리뷰, | list, 제어문 |
+
+#### What to do
+
+- [ ] R언어 복습
