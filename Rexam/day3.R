@@ -77,27 +77,6 @@ cat(v1, sep="-", "\n")
 print(paste("R", "은 통계분석", "전용 언어입니다.")) # 데이터셋은 print
 cat("R", "은 통계분석", "전용 언어입니다.", "\n") # 간단한건 cat
 
-ls()
-length(ls())
-save(list=ls(),file="all.rda") # varience will save in "all.rda" of rexam
-rm(list=ls())
-ls()
-load("all.rda")
-ls()
-
-#read file data
-nums <- scan("data/sample_num.txt")
-word_ansi <- scan("data/sample_ansi.txt",what="")
-words_utf8 <- scan("data/sample_utf8.txt", what="",encoding="UTF-8")
-words_utf8_new <- scan("data/sample_utf8.txt", what="")
-lines_ansi <- readLines("data/sample_ansi.txt")
-lines_utf8 <- readLines("data/sample_utf8.txt",encoding="UTF-8")
-
-df2 <- read.table("data/product_click.log", stringsAsFactors = T)
-str(df2)
-head(df2)
-summary(df2$V2)
-
 
 #제어문
 #if else

@@ -6,6 +6,9 @@ L1 = list(
 
 L1$sal * 2 -> result1
 
+# ex) L1['sal'] * 2 # L1['sal']: 리스트 형태 (이항연산자 불가)
+# ex) L1[['sal']] * 2 # L1[['sal']]: 벡터 (이항연산자 불가)
+
 # 문제2
 L2 = list(
   "scott",
@@ -18,6 +21,7 @@ L3 = list(
   c("A", "B", "C")
 )
 L3[[2]][1] <- 'Alpha'
+L3[[2]][[1]] # 이상함
 
 # 문제4
 L4 = 	list(
@@ -38,9 +42,9 @@ L5 = list(
   data3 = L4
 )
 
-L5[[1]][1]
-L5[[2]][,2]
-L5[[3]][[3]]
+L5[[1]][1] # 리스트에서 첫번째 [[1]], 백터에서 첫번째 [1]
+L5[[2]][,2] # L5[[2]]$ename, L5$data2$ename
+L5[[3]][[3]] # 벡터형태로 출력, L5[[3]][3] 리스트형태로 출력
 
 # 문제6
 L6 = list(
@@ -79,7 +83,7 @@ if (choice == 1){
 (deco = sample(1:3,1))
 
 if(deco == 1){
-  rep("*",count)
+  rep("*",count) # rep함수는 벡터이고 print 처럼 리턴한다.
 }else if(deco == 2){
   rep("$",count)
 }else {
@@ -100,7 +104,7 @@ if(score%/%10 >= 9){
 }else if(score%/%10 <= 5){
   score1 <- paste(score%/%10,"점",sep="")
 }
-level <- switch(EXPR = score1,"9점"="A","8점"="B","7점"="C","6점"="D","F")
+level <- switch(EXPR = score1,"10점"=,"9점"="A","8점"="B","7점"="C","6점"="D","F")
 cat(score," 점은 ",level,"등급입니다",sep="")
 
 # 문제11
