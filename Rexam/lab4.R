@@ -8,7 +8,7 @@ L1$sal * 2 -> result1 # L1[["sal"]] 가능
 result1
 
 # ex) L1['sal'] * 2 # L1['sal']: 리스트 형태 (이항연산자 불가)
-# ex) L1[['sal']] * 2 # L1[['sal']]: 벡터 (이항연산자 불가)
+# ex) L1[['sal']] * 2 # L1[['sal']]: 벡터 (이항연산자 가능)
 
 # 문제2
 L2 = list(
@@ -54,6 +54,7 @@ L6 = list(
   reading=list(85, 80)
   )
 mean(unlist(L6))
+
 
 # 문제7
 grade = sample(1:6, 1)
