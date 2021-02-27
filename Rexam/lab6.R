@@ -1,13 +1,27 @@
 # [ 문제1 ]
 countEvenOdd = function(x) {
   if(is.numeric(x)) {
-  data = c(1:X)
-  odd = length(data %% 2 == 0)
-  even = length(data %% 2 != 0)
+    
+  
+   return(r)
   } else {
     return()
   }
 }
+countEvenOdd(3)
+
+x = 11
+odd = 0
+even = 0
+for(i in 1:x)
+  if(i %% 2 == 1){
+    odd = odd + 1
+}else{
+  even = even + 1
+}
+cat(odd,even)
+
+
 
 evenodd2 <- function(p) {
   if(p %% 2 == 0) 
