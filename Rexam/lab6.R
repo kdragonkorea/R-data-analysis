@@ -1,13 +1,5 @@
 # [ 문제1 ]
-countEvenOdd = function(x) {
-  if(is.numeric(x)) {
-    
-  
-   return(r)
-  } else {
-    return()
-  }
-}
+
 countEvenOdd(3)
 
 x = 11
@@ -21,38 +13,49 @@ for(i in 1:x)
 }
 cat(odd,even)
 
-
-
-evenodd2 <- function(p) {
-  if(p %% 2 == 0) 
-    r <- "even" 
-  else 
-    r <- "odd"
-  return(r)
+# [풀이]
+countEvenOdd = function(x) {
+  if(is.numeric(x) || !is.vector(x)) # | 하나도 가능
+    return()
+  else {
+    total = length(x)
+    even = 0
+    for (i in 1:total) {
+      if (x[i] %% 2 == 0) {
+        even = even+1;
+        # odd = total-even
+      }
+    }
+    odd = total-even
+    return (list(even = even, odd = odd))
+  }
 }
-lapply(v, evenodd2)
-evenodd2(3)
-
+countEvenOdd(c(1,4,3))
 
 # [ 문제2 ]
-vmSum <- function(x){
-  result <- NULL
-  if(is.vector(x) && !is.list(x) && is.numeric(x)) {
-    result <- sum(x)
-  } else {
-    if(is.vector(x) && !is.numeric(x)){
-      stop("숫자 벡터를 전달하숑!")  
-    } else
-      stop("벡터만 전달하숑!")
-  }
-  return(result)
+
+# [풀이]
+vmSum <- function(vt){
+  if (!is.vector(vt) || is.list(vt)){
+    return("벡터만 전달하숑!")
+  } else if(!is.numeric(vt)){
+    print("숫자 벡터를 전달하숑!");
+    return(0)
+  } else
+    return(sum(vt))
 }
-vmSum(1:5)
-vmSum(LETTERS)
+
+vmSum(c(1,4,3))
+vmSum(c(1,2,3,4,5))
+vmSum(c(1,"가"))
+vmSum(c("가","1"))
+vmSum(data.frame(1,2,3))
 vmSum(list(1,2,3))
 
 
 # [ 문제3 ]
+
+
 # [ 문제4 ]
 # [ 문제5 ]
 

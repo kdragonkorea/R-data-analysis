@@ -4,7 +4,7 @@ nums <- scan("data/sample_num.txt") # 숫자로 인식하며, 숫자가 아닌 �
 word_ansi <- scan("data/sample_ansi.txt",what="") # what을 넣으면 숫자가 아닌 문자로
 words_utf8 <- scan("data/sample_utf8.txt", what="",encoding="UTF-8")
 words_utf8_new <- scan("data/sample_utf8.txt", what="")
-lines_ansi <- readLines("data/sample_ansi.txt")
+lines_ansi <- readLines("data/sample_ansi.txt") # 행단위로 구분해서 인식한다
 lines_utf8 <- readLines("data/sample_utf8.txt",encoding="UTF-8")
 
 df2 <- read.table("data/product_click.log", stringsAsFactors = T) # read.csv() 유사함
