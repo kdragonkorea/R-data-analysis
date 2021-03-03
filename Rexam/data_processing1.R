@@ -8,3 +8,6 @@ ABC = function(x) {
 sapply(v, ABC)
 
 # LETTERS[v] 와의 차이는 ?
+
+# [풀이]
+sapply(v,function(d) LETTERS[d])
