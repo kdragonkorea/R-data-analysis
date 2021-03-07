@@ -300,7 +300,45 @@
      [2,] "b"  "d"  "f"  "p" 
      ```
 
+2. matrix의 각 행 또는 열의 최대,최소값 구하기
 
+   - array()
+
+     ```R
+     > m1
+          [,1] [,2] [,3] [,4] [,5]
+     [1,]   10   12   14   16   18
+     [2,]   20   22   24   26   28
+     [3,]   30   32   34   36   38
+     
+     > row_max <- apply(m1,1,max);row_max # apply(matrix, 행, 함수)
+     [1] 18 28 38
+     > col_max <- apply(m1,2,max);col_max # apply(matrix, 열, 함수)
+     [1] 30 32 34 36 38
+     ```
+
+3. matrix의 행과 열의 이름 정의
+
+   - rownames(), colnames()
+
+     ```R
+     > m3
+          [,1] [,2] [,3]
+     [1,]    1    2    3
+     [2,]    4    5    6
+     [3,]    7    8    9
+     
+     colnames(m3) <- c('col1','col2','col3')
+     rownames(m3) <- c('row1','row2','row3')
+     
+     > m3
+          col1 col2 col3
+     row1    1    2    3
+     row2    4    5    6
+     row3    7    8    9
+     ```
+
+     
 
 #### 배열 함수 (array)
 
