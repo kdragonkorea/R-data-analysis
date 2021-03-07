@@ -7,12 +7,13 @@ url<-'https://hotel.naver.com/hotels/item?hotelId=hotel:Shilla_Stay_Yeoksam&dest
 remDr$navigate(url)
 Sys.sleep(2)
 
-reple <- NULL;
+reple <- NULL; btn <- NULL; doms <- NULL;
 
 # 첫 페이지 댓글 내용 읽기
 doms <- remDr$findElements(using = "css selector", "div.review_ta.ng-scope > ul > li > div.review_desc > p")
 reple_v <- sapply(doms, function (x) {x$getElementText()})
-reple <- append(reple, unlist(reple_v))
+reple <- append(reple, unlist(reple_v));reple
+Sys.sleep(2)
 
 repeat{
   # 다음 버튼을 찾아서 클릭 이벤트를 발생

@@ -106,6 +106,7 @@ gsub("[[:space:][:punct:]]", "", word)
 
 # 정규표현식 사용
 word <- "JAVA javascript Aa 가나다 AAaAaA123 %^&*"
+
 gsub(" ", "@", word); sub(" ", "@", word)
 gsub("A", "", word) 
 gsub("a", "", word) 

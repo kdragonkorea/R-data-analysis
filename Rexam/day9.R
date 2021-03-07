@@ -7,7 +7,7 @@ remDr$open()
 remDr$navigate("http://www.google.com/")
 
 webElem <- remDr$findElement(using = "css", "[name = 'q']")
-webElem$sendKeysToElement(list("PYTHON", key = "enter"))
+webElem$sendKeysToElement(list("호수킹", key = "enter"))
 
 
 remDr$navigate("http://www.naver.com/")
