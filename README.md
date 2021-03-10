@@ -501,9 +501,200 @@
 
 
 
-
-
 #### gsub와 sub
 
 - gsub("찾을문자열", "대체문자열", "대상문자열")을 모두 수행
 - sub("찾을문자열", "대체문자열", "대상문자열")을 첫번째만 수행
+
+
+
+# 2020-03-08 수업기록(R)
+
+|        오전        | 오후 |
+| :----------------: | :--: |
+| 동적 스크래핑 리뷰 |      |
+
+
+
+### 동적 스크래핑
+
+#### 1. 동적 스크래핑 Selenium 서버 기동 방법
+
+* selenium directory 접속 - `cmd` or `terminal`에서 아래 명령어 입력
+
+  ```
+  java -Dwebdriver.chrome.driver="chromedriver.exe" -jar selenium-server-standalone-4.0.0-alpha-1.jar -port 4445
+  ```
+
+* R Script에서 아래 명령어 입력
+
+  ```R
+  library(RSelenium)
+  
+  remDr <- remoteDriver(remoteServerAddr = "localhost" , port = 4445, browserName = "chrome")
+  remDr$open()
+  ```
+
+#### 2. 동적 스크래핑 주요 API 명령어
+
+- R  코드로 Selenium 서버에 접속하고 remoteDriver 객체 리턴  
+
+  ```R
+  remDr <-remoteDriver(remoteServerAddr="localhost",port=4445,browserName="chrome")
+  ```
+
+- 브라우저 오픈(크롬)
+
+  ```R
+  remDr$open()
+  ```
+
+- url 에 해당하는 웹페이지 랜더링
+
+  ```R
+  remDr$navigate(url)
+  ```
+
+- 태그 한 개 `찾기(webElement 객체)`, 태그가 없으면 NoSuchElement 오류 발생
+
+  ```R
+  one <- remDr$findElement(using='css selector','css선택자')
+  ```
+
+- 찾아진 태그의 태그 명 추출(webElement 객체가 제공)
+
+  ```R
+  one$getElementTagName()
+  ```
+
+- 찾아진 태그의 태그 `내용` 추출(webElement 객체가 제공)
+
+  ```R
+  one$getElementText()
+  ```
+
+- 찾아진 태그의 속성 명에 대한 값 추출 (webElement 객체가 제공)
+
+  ```R
+  one$getElementAttribute(”속성명”)
+  ```
+
+- 찾아진 태그에서 `클릭이벤트 발생`시키기, (webElement 객체가 제공)
+
+  ```R
+  one$clickElement()
+  ```
+
+#### 동적 스크래핑 주요 API 명령어2 (2개 이상)
+
+- 태그들을 찾기 존재하지 않으면 비어있는 리스트 리턴
+
+  ```R
+  doms <- remDr$findElements(using ="css selector", "컨텐트를추출하려는태그의 CSS선택자")
+  ```
+
+- 찾아진 태그들의 컨텐트들의 추출하여 리스트로 리턴
+
+  ```R
+  sapply(doms,function(x){x$getElementText()})
+  ```
+
+- 찾아진 태그들에 각각 `클릭` 이벤트 발생
+
+  ```R
+  sapply(doms, function(x){x$clickElement()})
+  ```
+
+- **가끔 clickElement() 가 일을 안 할 때가 있음… 이 때 사용하면 좋음**
+
+  ```R
+  remDr$executeScript("arguments[0].click();",nextPageLink)
+  ```
+
+- 페이지를 아래로 내리는(`스크롤`) 효과
+
+  ```R
+  webElem <- remDr$findElement("css selector", "body")
+  remDr$executeScript("scrollTo(0, document.body.scrollHeight)", args = list(webElem))
+  ```
+
+
+
+# 2020-03-09 수업기록(R)
+
+|             오전             | 오후 |
+| :--------------------------: | :--: |
+| wordcloud 시각화 연습, lab13 |      |
+
+#### 미니 프로젝트(R) 주제 선정하기
+
+- <u>데이터 크롤링 / 데이터 텍스트 분석 / 데이터 시각화 활용을 어떻게 할까?</u>
+- 주제1
+  - 주제선정: 인스타그램, 네이버블로그에서 여행에 관련된 <u>지역, 숙소명, 액티비티 이름</u> 등을 (인기 키워드로 검색) 추출하여 실제로 판매되고 있는 여행 인기 상품들과 관련성 비교
+  - 구체적으로 해야할 작업:
+  - 기대효과: 실제 여행객들이 선호하는 여행과 여행사에서 판매하고 있는 상품들이 얼마나 일치하고 있는지 알 수 있고 미발굴된 상품들은 제안 및 상품화할 수 있도록 추천
+- 주제2
+  - 주제선정: 채용시장에서 인기 있는 포지션
+  - 기대효과: 
+- 3/12(금): 워드 문서로 프로젝트 주제 및 계획을 소개하는 시간
+- 관심분야: 주식자료 동향, 소비패턴에 대한 분석, 교통정보(공공데이터 포털 API 있지만, 실시간 데이터)
+
+이커머스(쿠팡/티몬/위메프/G마켓/11번가/네이버) 택 3개 <-> 인스타그램 인기 키워드
+
+
+
+#### 데이터를 읽는 방법
+
+- 행단위로 구분 `없이` 읽어오는 방법: scan("directory/file name")
+
+  ```R
+  nums <- scan("data/sample_num.txt")
+  # 숫자로 인식하며, 숫자가 아닌 경우 에러 발생한다.
+  # encoding 코드셋명을 생략하고 읽으면 OS의 고유 코드셋(CP949) 정보를 반영해서 읽는다.
+  ```
+
+- 행단위로 구분 `없이` 읽어오는 방법2: scan("directory/file name", what="")
+
+  ```R
+  word_ansi <- scan("data/sample_ansi.txt",what="") # what을 넣으면 숫자가 아닌 문자로 출력
+  words_utf8 <- scan("data/sample_utf8.txt", what="",encoding="UTF-8")
+  ```
+
+- 행단위로 `구분하여` 읽어오는 방법: readLines("directory/file name")
+
+  ```R
+  lines_ansi <- readLines("data/sample_ansi.txt")
+  lines_utf8 <- readLines("data/sample_utf8.txt",encoding="UTF-8")
+  ```
+
+- data.frame으로 읽어오는 방법: read.csv("directory/file name", )
+
+  ```R
+  df2 <- read.table("data/product_click.log", stringsAsFactors = T) # read.csv() 유사함
+  
+  > str(df2)
+  'data.frame':	746 obs. of  2 variables:
+   $ V1: num  2.02e+11 2.02e+11 2.02e+11 2.02e+11 2.02e+11 ...
+   $ V2: Factor w/ 10 levels "p001","p002",..: 1 3 3 8 8 6 10 2 9 1 ...
+  
+  > head(df2)
+              V1   V2
+  1 201612120944 p001
+  2 201612120944 p003
+  3 201612120944 p003
+  4 201612120945 p008
+  5 201612121052 p008
+  6 201612121052 p006
+  
+  > summary(df2$V2)
+  p001 p002 p003 p004 p005 p006 p007 p008 p009 p010 
+    88  104   58   93   51   54   73   81   85   59 
+  ```
+
+- read.table()
+
+  ```R
+  d
+  ```
+
+  

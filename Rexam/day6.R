@@ -146,7 +146,8 @@ fox.says <- "It is only with the HEART that one can See Rightly"
 tolower(fox.says)
 toupper(fox.says)
 
-substr("Data Analytics", start=1, stop=4) # 문자를 부분적으로 추출
+# 문자를 부분적으로 추출
+substr("Data Analytics", start=1, stop=4) 
 substr("Data Analytics", 6, 14)
 substring("Data Analytics", 6)
 

@@ -7,7 +7,7 @@ remDr$open()
 remDr$navigate("http://www.google.com/")
 
 webElem <- remDr$findElement(using = "css", "[name = 'q']")
-webElem$sendKeysToElement(list("호수킹", key = "enter"))
+webElem$sendKeysToElement(list("PYTHON", key = "enter"))
 
 
 remDr$navigate("http://www.naver.com/")
@@ -346,8 +346,8 @@ repeat{
   starbucks <- rbind(starbucks ,cbind(shopname, addr, telephone, lat, lng))
   
   #스크롤 다운
-  if(index %% 3 == 0 && index != total)
-    remDr$executeScript("var dom=document.querySelectorAll('#mCSB_3_container > ul > li')[arguments[0]]; dom.scrollIntoView();", list(index)) # scrollIntoView: 특정 태그 안에서 스크롤 다운 이벤트 함수
+  # if(index %% 3 == 0 && index != total)
+    #remDr$executeScript("var dom=document.querySelectorAll('#mCSB_3_container > ul > li')[arguments[0]]; dom.scrollIntoView();", list(index)) # scrollIntoView: 특정 태그 안에서 스크롤 다운 이벤트 함수
 }
 write.csv(starbucks, "output/starbucks.csv")
 
